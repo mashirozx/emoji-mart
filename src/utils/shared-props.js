@@ -10,32 +10,14 @@ const EmojiPropTypes = {
   native: PropTypes.bool,
   forceSize: PropTypes.bool,
   tooltip: PropTypes.bool,
+  useButton: PropTypes.bool,
   skin: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
   sheetSize: PropTypes.oneOf([16, 20, 32, 64]),
-  set: PropTypes.oneOf([
-    'apple',
-    'google',
-    'twitter',
-    'emojione',
-    'messenger',
-    'facebook',
-  ]),
+  sheetColumns: PropTypes.number,
+  sheetRows: PropTypes.number,
+  set: PropTypes.oneOf(['apple', 'google', 'twitter', 'facebook']),
   size: PropTypes.number.isRequired,
   emoji: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-}
-
-const EmojiDefaultProps = {
-  skin: 1,
-  set: 'apple',
-  sheetSize: 64,
-  native: false,
-  forceSize: false,
-  tooltip: false,
-  backgroundImageFn: (set, sheetSize) =>
-    `https://unpkg.com/emoji-datasource-${set}@${EMOJI_DATASOURCE_VERSION}/img/${set}/sheets-256/${sheetSize}.png`,
-  onOver: () => {},
-  onLeave: () => {},
-  onClick: () => {},
 }
 
 const PickerPropTypes = {
@@ -58,49 +40,32 @@ const PickerPropTypes = {
   showPreview: PropTypes.bool,
   showSkinTones: PropTypes.bool,
   emojiTooltip: EmojiPropTypes.tooltip,
+  useButton: EmojiPropTypes.useButton,
+  theme: PropTypes.oneOf(['auto', 'light', 'dark']),
   include: PropTypes.arrayOf(PropTypes.string),
   exclude: PropTypes.arrayOf(PropTypes.string),
   recent: PropTypes.arrayOf(PropTypes.string),
   autoFocus: PropTypes.bool,
+  enableFrequentEmojiSort: PropTypes.bool,
   custom: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       short_names: PropTypes.arrayOf(PropTypes.string).isRequired,
       emoticons: PropTypes.arrayOf(PropTypes.string),
       keywords: PropTypes.arrayOf(PropTypes.string),
-      imageUrl: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string,
+      spriteUrl: PropTypes.string,
+      sheet_x: PropTypes.number,
+      sheet_y: PropTypes.number,
+      size: PropTypes.number,
+      sheetColumns: PropTypes.number,
+      sheetRows: PropTypes.number,
     }),
   ),
+  skinEmoji: PropTypes.string,
+  notFound: PropTypes.func,
+  notFoundEmoji: PropTypes.string,
+  icons: PropTypes.object,
 }
 
-const PickerDefaultProps = {
-  onClick: () => {},
-  onSelect: () => {},
-  onSkinChange: () => {},
-  emojiSize: 24,
-  perLine: 9,
-  i18n: {},
-  style: {},
-  title: 'Emoji Mart™',
-  emoji: 'department_store',
-  color: '#ae65c5',
-  set: EmojiDefaultProps.set,
-  skin: null,
-  defaultSkin: EmojiDefaultProps.skin,
-  native: EmojiDefaultProps.native,
-  sheetSize: EmojiDefaultProps.sheetSize,
-  backgroundImageFn: EmojiDefaultProps.backgroundImageFn,
-  emojisToShowFilter: null,
-  showPreview: true,
-  showSkinTones: true,
-  emojiTooltip: EmojiDefaultProps.tooltip,
-  autoFocus: false,
-  custom: [],
-}
-
-export {
-  EmojiPropTypes,
-  EmojiDefaultProps,
-  PickerPropTypes,
-  PickerDefaultProps,
-}
+export { EmojiPropTypes, PickerPropTypes }
