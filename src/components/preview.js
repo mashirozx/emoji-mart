@@ -20,9 +20,10 @@ export default class Preview extends React.PureComponent {
         showSkinTones,
         title,
         emoji: idleEmoji,
+        showPreview,
       } = this.props
 
-    if (emoji) {
+    if (emoji && showPreview) {
       var emojiData = getData(emoji, null, null, this.data),
         { emoticons = [] } = emojiData,
         knownEmoticons = [],
